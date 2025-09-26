@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_sale_order_form_inherit_state" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.state</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/> 
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='validity_date']" position="replace"/>
+
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="statusbar_visible">draft,sale</attribute>
+                  </xpath>
+                
+
+                <xpath expr="//field[@name='payment_term_id']" position="replace"/>
+
+
+                <!-- <xpath expr="//sheet" position="inside">
+                    <field name="alquiler_state" invisible="0"/>
+
+                    <div class="badge rounded-pill text-bg-primary float-end fs-6 border-0"
+                        invisible="alquiler_state != 'reservado'">
+                        Reservado
+                    </div>
+                    <div class="badge rounded-pill text-bg-success float-end fs-6 border-0"
+                        invisible="alquiler_state != 'en_uso'">
+                        En uso
+                    </div>
+                    <div class="badge rounded-pill text-bg-danger float-end fs-6 border-0"
+                        invisible="alquiler_state != 'mantenimiento'">
+                        Mantenimiento
+                    </div>
+                    <div class="badge rounded-pill text-bg-secondary float-end fs-6 border-0"
+                        invisible="alquiler_state != 'disponible'">
+                        Disponible
+                    </div>
+                </xpath> -->
+            </field>
+        </record>
+        
+
+        <record id="view_rental_order_form_hide_badges" model="ir.ui.view">
+            <field name="name">rental.order.form.hide.badges</field>
+            <field name="model">sale.order</field>
+            <field name="priority">30</field> 
+            <field name="inherit_id" ref="sale_renting.rental_order_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[contains(@class,'badge')]" position="replace"/>
+
+            </field>
+        </record>
+
+        <record id="ocultar_campo_mobile_res_user" model="ir.ui.view">
+            <field name="name">ocultar_campo_mobile_res_user</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_simple_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='mobile']" position="replace"/>
+                <xpath expr="//field[@name='phone']" position="after">
+                    <field name="numero_de_identificacion"/>
+                    <field name="nacionalidad_related" string="Nacionalidad" readonly="0"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="ocultar_campo_vat_res_user" model="ir.ui.view">
+            <field name="name">ocultar_campo_vat_res_user</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="replace"/>
+            </field>
+        </record>
+    </data>
+    
+</odoo>
