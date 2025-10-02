@@ -7,11 +7,15 @@
     "license": "GPL-3",
     "data": [
         "security/ir.model.access.csv",
+        "report/contrato_dinamico_template.xml",
+        "report/contrato_dinamico_report.xml",
+        "report/recibo_pago_inh.xml",
+        "views/info_vendedor_view.xml",
+        "views/contrato_dinamico.xml", 
         "views/sale_renting_inherit.xml",
         "views/inventory_view_inherit.xml",
         "views/sale_order_view.xml",
-        "report/contrato_dinamico_template.xml",
-        "report/contrato_dinamico_report.xml",
+        
     ],
     "installable": True,
     "application": False

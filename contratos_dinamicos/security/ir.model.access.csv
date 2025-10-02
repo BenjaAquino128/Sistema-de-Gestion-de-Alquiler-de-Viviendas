@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_contrato_dinamico_user,contrato.dinamico user,model_contrato_dinamico,base.group_user,1,0,0,0
 access_contrato_dinamico_manager,contrato.dinamico manager,model_contrato_dinamico,sales_team.group_sale_manager,1,1,1,0
+access_info_vendedor_user,info.vendedor user,model_info_vendedor,base.group_user,1,0,0,0
+access_info_vendedor_manager,info.vendedor manager,model_info_vendedor,sales_team.group_sale_manager,1,1,1,0

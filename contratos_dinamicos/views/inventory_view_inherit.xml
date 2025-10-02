@@ -1,29 +1,20 @@
 <odoo>
-    <data>
-      <record id="product_template_form_contract_page" model="ir.ui.view">
-        <field name="name">product.template.form.contract.page</field>
-        <field name="model">product.template</field>
-        <field name="inherit_id" ref="product.product_template_form_view"/>
-        <field name="arch" type="xml">
-          <xpath expr="//page[@name='invoicing']" position="after">
-            <page string="Datos del contrato" name="contract_data">
-                <group string="Contrato de Alquiler Completo">
-                    <field name="piso"/>
-                    <field name="bloque"/>
-                    <field name="departamento"/>
-                    <field name="ubicacion"/>
-                    <field name="nis"/>
-                    <field name="medidor"/>
-                    <field name="dias_gracia"/>
-                </group>
-            </page>
-          </xpath>
-
-          <xpath expr="//field[@name='invoice_policy']" position="after">
-              <field name="tipo_de_alquiler"/>
-          </xpath>
-        </field>
-      </record>
-    </data>
-  </odoo>
+  <data>
+    <record id="product_template_form_contract_page" model="ir.ui.view">
+      <field name="name">product.template.form.contract.page</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_form_view" />
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='invoice_policy']" position="after">
+          <field name="tipo_de_alquiler" />
+          <field name="metros_cuadrados" />
+          <field name="ubicacion" />
+          <field name="nis" />
+          <field name="medidor" />
+          <field name="dias_gracia" />
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
   

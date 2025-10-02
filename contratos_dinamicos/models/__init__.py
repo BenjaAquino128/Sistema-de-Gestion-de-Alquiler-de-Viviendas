@@ -1,3 +1,3 @@
 from . import product_template
 from . import sale_order
-from . import res_users_inh
+from . import info_vendedor

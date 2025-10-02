@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="contrato_dinamico_form_edit" model="ir.ui.view">
+            <field name="name">contract.dinamico.form.edit</field>
+            <field name="model">contrato.dinamico</field>
+            <field name="arch" type="xml">
+                <form string="Contrato Dinamico">
+                    <sheet
+                        style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; margin: 0 auto; resize: both;">
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field colspan="2" name="contract_template"
+                                nolabel="1"
+                                placeholder="Escribe el contrato aquí..."
+                                style="height: 1000px; width: 100%; text-align: justify; overflow-y: auto;" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_contrato_dinamico" model="ir.actions.act_window">
+            <field name="name">Tipos de Contratos</field>
+            <field name="res_model">contrato.dinamico</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="tipo_contrato_id"
+            name="Tipos de Contratos"
+            parent="sale_renting.menu_rental_config"
+            sequence="20"
+            action="action_contrato_dinamico" />
+    </data>
+</odoo>

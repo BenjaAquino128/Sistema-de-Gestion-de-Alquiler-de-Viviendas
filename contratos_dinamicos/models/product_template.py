@@ -4,9 +4,7 @@ from odoo import models, fields
 class ProductTemplateInherit(models.Model):
     _inherit = 'product.template'
 
-    piso = fields.Char("Piso")
-    bloque = fields.Char("Bloque")
-    departamento = fields.Char("Departamento")
+    metros_cuadrados = fields.Char("Metros Cuadrados de la Vivienda")
     ubicacion = fields.Char("Ubicación del inmueble")
     nis = fields.Char("NIS Ande")
     medidor = fields.Char("N° de Medidor")

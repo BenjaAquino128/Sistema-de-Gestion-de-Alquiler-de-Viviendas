@@ -1,8 +1,11 @@
 from odoo import models, fields,api
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import math
 import logging
 _logger = logging.getLogger(__name__)
+
+
 
 class ContratoDinamico(models.Model):
     _name = "contrato.dinamico"
@@ -17,7 +20,11 @@ class SaleOrder(models.Model):
 
     contrato_dinamico = fields.Many2one("contrato.dinamico", string="Tipo de Contrato",
                                         help="Selecciona el contrato dinamico correspondiente")
+                                        
     contrato_formateado = fields.Html()
+
+    propietario_vivienda = fields.Many2one('info.vendedor', string="Propietario de la Vivienda",
+                                           help="Selecciona el propietario de la vivienda")
 
     es_mensual = fields.Boolean(
             compute="_compute_es_mensual",
@@ -55,11 +62,10 @@ class SaleOrder(models.Model):
             if 'por_dia' in tipos:
                 if order.rental_start_date and order.rental_return_date:
                     diff = fields.Datetime.from_string(order.rental_return_date) - fields.Datetime.from_string(order.rental_start_date)
-                    order.duration_days = diff.days
-                    order.remaining_hours = int(diff.total_seconds() // 3600) - (diff.days * 24)
+                    order.duration_days = diff.days + 1  # incluir el día final
                 else:
                     order.duration_days = 0
-                    order.remaining_hours = 0
+
                 continue
 
     meses = {

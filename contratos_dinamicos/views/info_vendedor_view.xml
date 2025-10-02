@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_info_vendedor_form" model="ir.ui.view">
+            <field name="name">info.vendedor.form</field>
+            <field name="model">info.vendedor</field>
+            <field name="arch" type="xml">
+                <form string="Información del Vendedor">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box" />
+                        <div class="oe_title">
+                            <field name="image_1920" widget="image" class="oe_avatar"
+                                options="{'preview_image': 'image_1920'}" style="float:right;" />
+
+                            <label for="name" class="oe_edit_only" />
+                            <h1>
+                                <field name="name" class="oe_inline" />
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="email" />
+                            <field name="phone" />
+                            <field name="numero_de_identificacion" />
+                            <field name="nacionalidad_id" />
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>
