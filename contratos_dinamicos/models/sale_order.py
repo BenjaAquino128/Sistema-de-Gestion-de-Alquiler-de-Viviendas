@@ -14,6 +14,13 @@ class ContratoDinamico(models.Model):
     name = fields.Char(string="Nombre del Contrato", required=True)
     contract_template = fields.Html()
 
+    state = fields.Selection([
+        ('draft', 'Cotización'),
+        ('sent', 'Cotización Enviada'),
+        ('sale', 'Orden de Venta'),
+        ('cancel', 'Cancelado'),
+    ], string="Estado de la venta", readonly=True)
+
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
@@ -36,6 +43,50 @@ class SaleOrder(models.Model):
             tipos = order.order_line.mapped('product_template_id.tipo_de_alquiler')
             order.es_mensual = 'mensual' in tipos
 
+
+    @api.model
+    def write(self, vals):
+        """ Sobreescribe el campo 'state' en info.vendedor cuando cambia el state de sale.order """
+        res = super(SaleOrder, self).write(vals)
+
+        # Si el estado cambia, actualizamos 'state' en info.vendedor
+        if 'state' in vals:
+            for order in self:
+                if order.propietario_vivienda:
+                    # Actualiza el estado de 'info.vendedor' con el nuevo 'state' de 'sale.order'
+                    order.propietario_vivienda.write({'state': order.state})
+        return res
+    
+
+    @api.model
+    def write(self, vals):
+        """ Sobreescribe el campo 'state' en contrato.dinamico cuando cambia el state de sale.order """
+        res = super(SaleOrder, self).write(vals)
+
+        # Si el estado cambia, actualizamos 'state' en contrato.dinamico
+        if 'state' in vals:
+            for order in self:
+                if order.contrato_dinamico:
+                    # Actualiza el estado de 'contrato.dinamico' con el nuevo 'state' de 'sale.order'
+                    order.contrato_dinamico.write({'state': order.state})
+        return res
+    
+    @api.model
+    def write(self, vals):
+        """ Sobreescribe el campo 'state' en sale.order.line cuando cambia el state de sale.order """
+        res = super(SaleOrder, self).write(vals)
+
+        # Si el estado cambia, actualizamos 'state' en sale.order.line
+        if 'state' in vals:
+            for order in self:
+                if order.state == 'sale':  # Cuando el estado es 'sale'
+                    # Actualiza el estado de todas las líneas del pedido
+                    for line in order.order_line:
+                        line.write({'state': 'sale'})  # Aseguramos que las líneas tienen el estado 'sale'
+                    
+                    # Si el estado es 'sale', ocultamos la posibilidad de agregar productos y otras secciones.
+                    # Esto se hará en la vista XML de la siguiente manera
+        return res
 
     @api.depends('order_line.product_template_id.tipo_de_alquiler',
                  'rental_start_date', 'rental_return_date')
@@ -260,22 +311,17 @@ class SaleOrder(models.Model):
         ('en_uso', 'En uso'),
         ('mantenimiento', 'Mantenimiento'),
         ('disponible', 'Disponible'),
-    ], string="Estado del alquiler", default="disponible")
+    ], string="Estado del alquiler", default="disponible")          
 
 
+class SaleOrderLineInh(models.Model):
+    _inherit = 'sale.order.line'
     
-                        
-                    
-
-
-
-
-
-
-
-
-
-
-
+    state = fields.Selection([
+        ('draft', 'Cotización'),
+        ('sent', 'Cotización Enviada'),
+        ('sale', 'Orden de Venta'),
+        ('cancel', 'Cancelado'),
+    ], string="Estado de la venta", readonly=True)
 
 

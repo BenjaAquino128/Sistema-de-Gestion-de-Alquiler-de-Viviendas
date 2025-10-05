@@ -14,14 +14,17 @@
 
                             <label for="name" class="oe_edit_only" />
                             <h1>
-                                <field name="name" class="oe_inline" />
+                                <field name="name" class="oe_inline" readonly="state == 'sale'"/>
                             </h1>
                         </div>
                         <group>
-                            <field name="email" />
-                            <field name="phone" />
-                            <field name="numero_de_identificacion" />
-                            <field name="nacionalidad_id" />
+                            <field name="email" readonly="state == 'sale'"/>
+                            <field name="phone" readonly="state == 'sale'"/>
+                            <field name="numero_de_identificacion" readonly="state == 'sale'"/>
+                            <field name="nacionalidad_id" readonly="state == 'sale'"/>
+
+                            <field name="state" invisible="1"/>
+
                         </group>
                     </sheet>
 

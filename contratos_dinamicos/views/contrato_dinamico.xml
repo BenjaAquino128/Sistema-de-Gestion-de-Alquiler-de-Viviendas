@@ -10,9 +10,11 @@
                         style="display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 100%; margin: 0 auto; resize: both;">
                         <group>
                             <field name="name" />
+                            <field name="state" invisible="1"/>
+
                         </group>
                         <group>
-                            <field colspan="2" name="contract_template"
+                            <field colspan="2" name="contract_template" readonly="state == 'sale'"
                                 nolabel="1"
                                 placeholder="Escribe el contrato aquí..."
                                 style="height: 1000px; width: 100%; text-align: justify; overflow-y: auto;" />

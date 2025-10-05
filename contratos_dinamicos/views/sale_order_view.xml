@@ -3,27 +3,26 @@
     <record id="view_order_form_inherit_contract_page" model="ir.ui.view">
         <field name="name">sale.order.form.contract.page</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/>
+        <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/notebook/page[@name='other_information']" position="after">
                 <page string="Contratos Dinamicos">
                     <group>
-                        <field name="contrato_dinamico"/>
-                        <field name="propietario_vivienda"/>
-                        <field name="user_id" invisible="1"/>
-                        <field name="es_mensual" invisible="1"/>
+                        <field name="contrato_dinamico" readonly="state == 'sale'" />
+                        <field name="propietario_vivienda" readonly="state == 'sale'" />
+                        <field name="locked" invisible="1" />
+                        <field name="user_id" invisible="1" />
+                        <field name="es_mensual" invisible="1" />
                     </group>
                 </page>
             </xpath>
-
-           
         </field>
     </record>
 
     <record id="ocultar_firma_del_cliente" model="ir.ui.view">
         <field name="name">ocultar.firma.del.cliente</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/>
+        <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//form/sheet/notebook/page[@name='customer_signature']" position="replace">
             </xpath>
@@ -33,7 +32,7 @@
     <record id="ocultar_campos" model="ir.ui.view">
         <field name="name">ocultar.campos</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/>
+        <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='rental_start_date']" position="attributes">
                 <attribute name="invisible">es_mensual == True</attribute>
@@ -43,13 +42,4 @@
 
         </field>
     </record>
-    
-
-    
-    
-
-
-    
-
-
 </odoo>

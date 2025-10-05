@@ -13,9 +13,9 @@
         "views/info_vendedor_view.xml",
         "views/contrato_dinamico.xml", 
         "views/sale_renting_inherit.xml",
-        "views/inventory_view_inherit.xml",
+        "views/product_tempĺate_inh.xml",
         "views/sale_order_view.xml",
-        
+        "views/res_user_inh.xml",
     ],
     "installable": True,
     "application": False
